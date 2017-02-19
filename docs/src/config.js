@@ -32,17 +32,9 @@ Vue.material.registerTheme({
     primary: 'green',
     accent: 'pink'
   },
-  'light-blue': {
-    primary: 'light-blue',
-    accent: 'yellow'
-  },
   teal: {
     primary: 'teal',
     accent: 'orange'
-  },
-  'blue-grey': {
-    primary: 'blue-grey',
-    accent: 'blue'
   },
   cyan: {
     primary: 'cyan',
@@ -56,11 +48,14 @@ Vue.material.registerTheme({
     primary: 'white',
     accent: 'blue'
   },
-  grey: {
+  amir: {
     primary: {
-      color: 'grey',
-      hue: 300
+      color: 'pink',
+      hue: 800
     },
-    accent: 'indigo'
+    accent: {
+      color: 'pink',
+      hue: 800
+    }
   }
 });

@@ -30,27 +30,8 @@ let router = new VueRouter({
 });
 
 let Docs = Vue.component('app', App);
-let handleSectionTheme = (currentRoute) => {
-  let theme = 'default';
-  let name = currentRoute.name;
-
-  if (name) {
-    if (name === 'getting-started') {
-      theme = 'indigo';
-    } else if (name.indexOf('themes') >= 0) {
-      theme = 'cyan';
-    } else if (name.indexOf('ui-elements') >= 0) {
-      theme = 'purple';
-    } else if (name === 'changelog') {
-      theme = 'orange';
-    } else if (name === 'about') {
-      theme = 'green';
-    } else if (name === 'error') {
-      theme = 'red';
-    }
-  }
-
-  Vue.material.setCurrentTheme(theme);
+let handleSectionTheme = () => {
+  Vue.material.setCurrentTheme('amir');
 };
 
 Docs = new Docs({
@@ -67,13 +48,6 @@ router.beforeEach((to, from, next) => {
     if (mainContent) {
       mainContent.scrollTop = 0;
     }
-
-    Docs.closeSidenav();
-
     next();
   });
-});
-
-router.afterEach((to) => {
-  handleSectionTheme(to);
 });

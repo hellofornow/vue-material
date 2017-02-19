@@ -1,5 +1,6 @@
 /* Root */
 const Introduction = (r) => require.ensure([], () => r(require('./pages/Introduction')), 'base');
+const RSVP = (r) => require.ensure([], () => r(require('./pages/RSVP')), 'base');
 const GettingStarted = (r) => require.ensure([], () => r(require('./pages/GettingStarted')), 'base');
 const About = (r) => require.ensure([], () => r(require('./pages/About')), 'base');
 const Changelog = (r) => require.ensure([], () => r(require('./pages/Changelog')), 'base');
@@ -49,6 +50,11 @@ const main = [
     path: '/',
     name: 'introduction',
     component: Introduction
+  },
+  {
+    path: '/rsvp',
+    name: 'rsvp',
+    component: RSVP
   },
   {
     path: '/getting-started',

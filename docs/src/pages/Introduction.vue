@@ -1,5 +1,5 @@
 <template>
-  <page-content page-title="Introduction">
+  <page-content page-title="">
     <div class="main-content">
       <div class="introduction">
         <div class="button-actions">
