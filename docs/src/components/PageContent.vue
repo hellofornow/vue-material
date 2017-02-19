@@ -6,8 +6,10 @@
           <md-icon>face</md-icon> Amy and Amir's Wedding
         </router-link>
       </div>
-      <div>
-        <router-link exact to="/rsvp">RSVP</router-link>
+      <div class="rsvp" v-if="pageTitle != 'RSVP'">
+        <router-link exact to="/rsvp">
+          <md-button class="md-raised md-primary">RSVP</md-button>
+        </router-link>
       </div>
     </md-whiteframe>
 
@@ -18,7 +20,6 @@
 <style lang="sass" scoped>
   a {
     color: #d81b60 !important;
-    font-weight: 500;
   }
   a:hover {
     text-decoration: none !important;
@@ -35,19 +36,25 @@
     z-index: 2;
     color: #fff !important;
   }
-
-  .nav-trigger {
-
-  @media (min-width: 560px) {
-    display: none;
-  }
-  }
   .md-title {
     flex: 1;
-
-  @media (min-width: 560px) {
-    margin-left: 8px;
+    .md-icon {
+      vertical-align: top;
+    }
+    @media (max-width: 920px) {
+      margin-left: 8px;
+    }
+    @media (min-width: 920px) {
+      margin-left: 15% !important;
+    }
   }
+  .rsvp {
+    @media(max-width: 920px) {
+      margin-right: 5px;
+    }
+    @media(min-width: 920px) {
+      margin-right: 20px;
+    }
   }
 </style>
 
