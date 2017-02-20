@@ -17,7 +17,7 @@ let dev = {
   },
   env: {
     NODE_ENV: '"development"'
-  }
+  },
 };
 
 let prod = {

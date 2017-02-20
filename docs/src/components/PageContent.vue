@@ -18,9 +18,6 @@
 </template>
 
 <style lang="sass" scoped>
-  a {
-    color: #d81b60 !important;
-  }
   a:hover {
     text-decoration: none !important;
   }
@@ -37,6 +34,9 @@
     color: #fff !important;
   }
   .md-title {
+    a {
+      color: #d81b60 !important;
+    }
     flex: 1;
     .md-icon {
       vertical-align: top;

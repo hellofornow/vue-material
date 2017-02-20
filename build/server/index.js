@@ -1,4 +1,5 @@
 import path from 'path';
+import proxy from 'express-http-proxy';
 import express from 'express';
 import chalk from 'chalk';
 import webpack from 'webpack';
@@ -19,16 +20,18 @@ const devMiddlewareInstance = devMiddleware(compiler, {
 });
 
 const hotMiddlewareInstance = hotMiddleware(compiler, {
-  log() { }
+  log() {
+  }
 });
 
 compiler.plugin('compilation', (compilation) => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, done) => {
-    hotMiddlewareInstance.publish({ action: 'reload' });
+    hotMiddlewareInstance.publish({action: 'reload'});
     done();
   });
 });
 
+app.use('/api', proxy('http://localhost:9000'));
 app.use(historyApiFallback());
 app.use(devMiddlewareInstance);
 app.use(hotMiddlewareInstance);
@@ -44,7 +47,6 @@ devMiddlewareInstance.waitUntilValid(() => {
 export default app.listen(config.server.port, (error) => {
   if (error) {
     console.log(chalk.red(error));
-
     return;
   }
 });

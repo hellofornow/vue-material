@@ -1,6 +1,7 @@
 /* Third Party */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 
 /* Configs */
 import './config.js';
@@ -22,6 +23,7 @@ Vue.component('code-block', CodeBlock);
 Vue.component('release-version', ReleaseVersion);
 
 Vue.use(VueRouter);
+Vue.use(VueResource);
 
 let router = new VueRouter({
   mode: 'hash',
