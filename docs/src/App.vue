@@ -6,6 +6,7 @@
   </div>
 </template>
 
+<!--@formatter:off-->
 <style lang="sass">
   @import '../../src/core/stylesheets/variables.scss';
 
@@ -75,6 +76,11 @@
     }
   }
 
+  .md-error {
+    font-weight: bold;
+    font-size: 14px !important;
+  }
+
   code {
     &:not(.hljs) {
       margin-left: 1px;
@@ -108,7 +114,16 @@
   .md-whiteframe-1dp {
     box-shadow: none !important;
   }
+
+  .md-theme-amir label.md-checkbox-label {
+    top: 1px !important;
+    left: 20px !important;
+  }
+  .md-theme-amir .md-input-container:after {
+    background: none;
+  }
 </style>
+<!--@formatter:on-->
 
 <script>
   export default {

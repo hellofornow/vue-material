@@ -35,7 +35,7 @@
   }
   .md-title {
     a {
-      color: #d81b60 !important;
+      color: #ad1457 !important;
     }
     flex: 1;
     .md-icon {
