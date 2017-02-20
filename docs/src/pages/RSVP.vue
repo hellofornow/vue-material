@@ -19,7 +19,7 @@
         </form>
       </div>
 
-      <div v-else class="step2">
+      <div v-if="people.length > 0 && !finished" class="step2">
         <h3>Welcome! We're very excited to share our special day with you.</h3>
         <form @submit.stop.prevent="submitAttending">
           <div class="person-container">
@@ -33,12 +33,34 @@
           </md-layout>
         </form>
       </div>
-    </div>
 
-    <div class="error" v-if="serverError && !submitting">
-      <div>An error occured! Please try again.</div>
-      <div>I've been notified</div>
-      <div>Please email me at amir.toole@gmail.com if you're concerned</div>
+      <div v-if="finished" class="finished">
+        <div v-if="attending">
+          We're thrilled you can make it to our wedding!
+          <div>
+            Looking forward to seeing you on May 21st!
+          </div>
+        </div>
+
+        <div v-else>
+          <div>We're sorry you can't make it to our wedding.</div>
+          <div>We hope to be in touch soon.</div>
+        </div>
+
+        <div class="love">
+          <div>Love,</div>
+          <div>
+            Amy and Amir
+          </div>
+        </div>
+      </div>
+
+      <md-layout md-align="center">
+        <div class="error" v-if="serverError && !submitting">
+          <div>An error occured! Please try again.</div>
+          <div>Please email me at amir.toole@gmail.com if you're concerned.</div>
+        </div>
+      </md-layout>
     </div>
   </page-content>
 </template>
@@ -77,17 +99,32 @@
   .error {
     margin-top: 30px;
   }
+
+  .finished {
+    flex-direction: column;
+    max-width: 300px;
+
+    @media (max-width: 600px) {
+      max-width: 100%;
+    }
+
+    .love {
+      margin-top: 20px;
+    }
+  }
 </style>
 <!--@formatter:on-->
 
 <script>
   export default {
     data: () => ({
-      code: '1',
+      code: '',
       submitting: false,
       codeValidateClass: '',
       people: [],
-      serverError: false
+      serverError: false,
+      finished: false,
+      attending: false
     }),
     methods: {
       submitCode() {
@@ -113,12 +150,25 @@
       },
       submitAttending() {
         this.submitting = true;
-        console.log(this.people);
+        this.$http.post('/api/attendance/' + this.code, this.people).then((response) => {
+          this.attending = false;
+          for (let p of this.people) {
+            if (p.attending === 'y') {
+              this.attending = true;
+              break;
+            }
+          }
+          this.finished = true;
+        }, (error) => {
+          console.error(error);
+        }).finally(() => {
+          this.submitting = false;
+        });
       }
     },
     mounted() {
       setTimeout(() => {
-        this.submitCode();
+//        this.submitCode();
       }, 100);
     }
   };

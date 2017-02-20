@@ -26,7 +26,8 @@
     max-height: 100%;
     flex: 1;
     display: flex;
-    flex-flow: column
+    flex-flow: column;
+    -webkit-overflow-scrolling: touch;
   }
 
   .main-header {

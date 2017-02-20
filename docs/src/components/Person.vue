@@ -66,7 +66,6 @@
   }
   .comment-container {
     .md-input-container {
-      margin-top: -15px;
     }
   }
 </style>
