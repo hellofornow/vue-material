@@ -6,34 +6,36 @@
       <md-layout>
         <!-- attending -->
         <md-layout md-flex="90">
-          <md-input-container>
+          <md-input-container v-bind:class="person.attending.length == 0 ? 'md-input-invalid' : ''">
             <label for="attending">Attending?</label>
-            <md-select v-model="person.attending" name="attending" id="attending" required>
+            <md-select v-model="person.attending" name="attending" id="attending" required v-bind:disabled="submitting">
               <md-option value="y">Yes, excited to celebrate with you!</md-option>
               <md-option value="n">No, decline with regret</md-option>
             </md-select>
+            <span class="md-error">Required</span>
           </md-input-container>
         </md-layout>
 
         <!--menu-->
         <md-layout md-flex="90">
-          <md-input-container v-if="person.attending == 'y'" class="menu-container">
+          <md-input-container v-if="person.attending == 'y'" v-bind:class="[person.attending == 'y' && person.dinner.length == 0 ? 'md-input-invalid' : '', 'menu-container']">
             <label for="menu">Meal selection</label>
-            <md-select v-if="person.attending" v-model="person.dinner" name="menu" id="menu" required>
+            <md-select v-if="person.attending" v-model="person.dinner" name="menu" id="menu" required v-bind:disabled="submitting">
               <md-option value="child" v-if="person.child" selected>Child meal</md-option>
               <md-option value="chicken">Chicken</md-option>
               <md-option value="beef">Beef</md-option>
               <md-option value="veg">Vegetarian</md-option>
               <md-option value="none">No meal</md-option>
             </md-select>
+            <span class="md-error">Required</span>
           </md-input-container>
         </md-layout>
 
         <!--comment-->
-        <md-layout md-flex="90">
+        <md-layout md-flex="90" class="comment-container">
           <md-input-container v-if="person.attending == 'y' && person.dinner">
             <label>Allergies/Comments</label>
-            <md-textarea v-model="person.comments"></md-textarea>
+            <md-textarea v-model="person.comments" v-bind:disabled="submitting"></md-textarea>
           </md-input-container>
         </md-layout>
 
@@ -53,16 +55,18 @@
   }
 
   .md-input-container {
-    margin: 0 0 9px;
+    margin: 0 0 15px;
   }
-  /*.menu-container {*/
-    /*width: 90%;*/
-  /*}*/
-  .comment-container {
-    /*margin: 0 auto;*/
 
+  .md-theme-amir.md-input-container.md-input-invalid label, .md-theme-amir.md-input-container.md-input-invalid input, .md-theme-amir.md-input-container.md-input-invalid textarea, .md-theme-amir.md-input-container.md-input-invalid .md-error, .md-theme-amir.md-input-container.md-input-invalid .md-count, .md-theme-amir.md-input-container.md-input-invalid .md-icon:not(.md-icon-delete) {
+    color: #ad1457 !important;
+  }
+  .md-theme-amir.md-input-container.md-input-invalid:after {
+    background: none;
+  }
+  .comment-container {
     .md-input-container {
-      /*margin-top: -25px;*/
+      margin-top: -15px;
     }
   }
 </style>
@@ -71,7 +75,8 @@
 <script>
   export default {
     props: {
-      person: {}
+      person: {},
+      submitting: Boolean
     },
     data: () => ({}),
     methods: {}

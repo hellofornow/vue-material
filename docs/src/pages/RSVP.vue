@@ -15,20 +15,30 @@
             <md-layout md-align="center">
               <md-spinner md-indeterminate v-if="submitting"></md-spinner>
             </md-layout>
-            <div class="error" v-if="serverError && !submitting">
-              <div>An error occured! Please try again.</div>
-              <div>I've been notified</div>
-              <div>Please email me at amir.toole@gmail.com if you're concerned</div>
-            </div>
           </div>
         </form>
       </div>
+
       <div v-else class="step2">
         <h3>Welcome! We're very excited to share our special day with you.</h3>
-        <div class="person-container">
-          <person v-for="person in people" v-bind:person="person"></person>
-        </div>
+        <form @submit.stop.prevent="submitAttending">
+          <div class="person-container">
+            <person v-for="person in people" v-bind:person="person" v-bind:submitting="submitting"></person>
+          </div>
+          <md-layout md-align="center">
+            <md-button type="submit" class="md-raised md-primary submitBtn" v-bind:disabled="submitting">Submit</md-button>
+          </md-layout>
+          <md-layout md-align="center">
+            <md-spinner md-indeterminate v-if="submitting"></md-spinner>
+          </md-layout>
+        </form>
       </div>
+    </div>
+
+    <div class="error" v-if="serverError && !submitting">
+      <div>An error occured! Please try again.</div>
+      <div>I've been notified</div>
+      <div>Please email me at amir.toole@gmail.com if you're concerned</div>
     </div>
   </page-content>
 </template>
@@ -57,6 +67,7 @@
     }
 
     .person-container {
+      margin-bottom: 30px;
       div:not(:last-child) {
           border-bottom: 1px solid #ddd;
         }
@@ -72,7 +83,7 @@
 <script>
   export default {
     data: () => ({
-      code: '29',
+      code: '1',
       submitting: false,
       codeValidateClass: '',
       people: [],
@@ -99,11 +110,15 @@
           this.submitting = false;
           this.serverError = true;
         });
+      },
+      submitAttending() {
+        this.submitting = true;
+        console.log(this.people);
       }
     },
     mounted() {
       setTimeout(() => {
-//        this.submitCode();
+        this.submitCode();
       }, 100);
     }
   };
