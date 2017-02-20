@@ -25,7 +25,9 @@
       </div>
       <div v-else class="step2">
         <h3>Welcome! We're very excited to share our special day with you.</h3>
-        <person v-for="person in people" v-bind:person="person"></person>
+        <div class="person-container">
+          <person v-for="person in people" v-bind:person="person"></person>
+        </div>
       </div>
     </div>
   </page-content>
@@ -52,6 +54,12 @@
 
     @media (max-width: 600px) {
       max-width: 100%;
+    }
+
+    .person-container {
+      div:not(:last-child) {
+          border-bottom: 1px solid #ddd;
+        }
     }
   }
 
@@ -95,7 +103,7 @@
     },
     mounted() {
       setTimeout(() => {
-        this.submitCode();
+//        this.submitCode();
       }, 100);
     }
   };
